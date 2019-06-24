@@ -5,8 +5,6 @@ import java.util.Scanner;
 import model.Elevators;
 import simulator.Gui;
 
-
-
 public class Controller {
 	public static ArrayList<Elevators> elevator_container;
 	private static int num_floors;
