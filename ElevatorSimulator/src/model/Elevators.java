@@ -41,8 +41,6 @@ public class Elevators {
 
 
     public void setCurrentFloor(double floor) {
-    
-    	
         this.current_floor = floor;
     }
 
@@ -55,17 +53,9 @@ public class Elevators {
        // return this.callQueue1;
     }
 
-  
-
     public void addQueue(int floor) {
         this.callQueue.add(floor);
-    
-        
     }
-     
-    
-    
-   
 
     public synchronized void servefloor(Elevators e) throws Exception {
         try {
@@ -74,7 +64,7 @@ public class Elevators {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-try{
+        try{
         while (getQueue().size() > 0) {
            // System.out.println("current floor" + getCurrentFloor() + "gotofloor" + getQueue().peek());
             if (getCurrentFloor() < getQueue().peek()) {
@@ -127,7 +117,7 @@ try{
             motion_direction = NO_DIRECTION;
       
             System.out.println();
-}catch(Exception ex) {}
+            }catch(Exception ex) {}
         }
    
 
@@ -137,36 +127,28 @@ try{
 
     public  void open() throws Exception {   int count=0;
    
-  
-    	   
-      for ( int doorsize = 0; doorsize < 5; doorsize++) {
-    	
-    	
-    	  try{
-    	Thread.sleep(150);
-    	  setDoorSize(doorsize); 
+        for ( int doorsize = 0; doorsize < 5; doorsize++) {
+            try{
+    	        Thread.sleep(150);
+    	        setDoorSize(doorsize);
     
     			Thread.sleep(150);
-    		}catch(Exception e) { System.out.println("error is here");
-        	
-    		
-    		
-        	
-               } 
-      }  
+    		}catch(Exception e) {
+                System.out.println("error is here");
+            }
+        }
     } 
     
 
     public void close() throws InterruptedException {
     
-    	if(getDoorSize()==4)
-    	  for ( int doorsize = getDoorSize(); doorsize > -1; doorsize--) {
-    	    	
-    	    	
-    	    Thread.sleep(150);
-    	    	  setDoorSize(doorsize);
-    	    	Thread.sleep(150);
-    	
+    	if(getDoorSize()==4) {
+            for (int doorsize = getDoorSize(); doorsize > -1; doorsize--) {
+                Thread.sleep(150);
+                setDoorSize(doorsize);
+                Thread.sleep(150);
+
+            }
         }
     }
     
