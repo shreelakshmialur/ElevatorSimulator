@@ -11,10 +11,7 @@ import javax.swing.JButton;
 
 import main.ElevatorCalls;
 
-
-
 public class Elevators {
-
     private int id;
     private double current_floor = 1;
     public static int motion_direction;
@@ -38,7 +35,6 @@ public class Elevators {
     public int getId() {
         return this.id;
     }
-
 
     public void setCurrentFloor(double floor) {
         this.current_floor = floor;
@@ -80,15 +76,13 @@ public class Elevators {
                 motion_direction = NO_DIRECTION;if (!ElevatorCalls.active_buttons.isEmpty()) { try{ if(getId()<0 &&e.getCurrentFloor()<0){ } 
                 
                 }catch(Exception t) {}
-                	ElevatorCalls.setInternal(getId(), (int)e.getCurrentFloor(), false); }
+                ElevatorCalls.setInternal(getId(), (int)e.getCurrentFloor(), false); }
                 if(!ElevatorCalls.active_buttons1.isEmpty()) { 
-               	 ElevatorCalls.setExternal((int) e.getCurrentFloor(),false); }	
+               	ElevatorCalls.setExternal((int) e.getCurrentFloor(),false); }	
                 ListIterator<JButton> litr = ElevatorCalls.active_buttons1.listIterator();
-              //  if((litr==litr.next())||litr.next()!=null) {System.out.println("gere"); }
+                //  if((litr==litr.next())||litr.next()!=null) {System.out.println("gere"); }
                  e.open(); e.close();   		 						
-                }
-        
-             else {
+             } else {
                 for (double i = getCurrentFloor(); i >= getQueue().peek(); i-=0.5) { try{ if(e==null) {} }catch(Exception ax) {}
                     e.setCurrentFloor(i);
                     System.out.print("\nElevator " + getId() + " is currently at floor : " + getCurrentFloor());
@@ -99,11 +93,11 @@ public class Elevators {
             	ElevatorCalls.setInternal(getId(), (int)e.getCurrentFloor(), false);	}																	
                 
                 if(ElevatorCalls.goToFloorEnteredByGui != -1) { 
-               	 ElevatorCalls.setExternal((int)e.getCurrentFloor(),false);}
-                ListIterator<JButton> litr = ElevatorCalls.active_buttons1.listIterator();
+               	 	ElevatorCalls.setExternal((int)e.getCurrentFloor(),false);}
+                	ListIterator<JButton> litr = ElevatorCalls.active_buttons1.listIterator();
            
-                  e.open(); e.close();
-            }		
+                  	e.open(); e.close();
+           	}		
            
         	ElevatorCalls.setInternal(getId(), (int)e.getCurrentFloor(), false);																		
         	ElevatorCalls.setExternal((int)e.getCurrentFloor(),false);
@@ -113,21 +107,18 @@ public class Elevators {
         		else
             getQueue().remove();  
         }
-          
-            motion_direction = NO_DIRECTION;
+        motion_direction = NO_DIRECTION;
       
-            System.out.println();
-            }catch(Exception ex) {}
-        }
+        System.out.println();
+        }catch(Exception ex) {}
+    }
    
-
     public synchronized void serveFloor2() {
         notify();
     }
 
     public  void open() throws Exception {   int count=0;
-   
-        for ( int doorsize = 0; doorsize < 5; doorsize++) {
+   	for ( int doorsize = 0; doorsize < 5; doorsize++) {
             try{
     	        Thread.sleep(150);
     	        setDoorSize(doorsize);
@@ -139,10 +130,8 @@ public class Elevators {
         }
     } 
     
-
     public void close() throws InterruptedException {
-    
-    	if(getDoorSize()==4) {
+        if(getDoorSize()==4) {
             for (int doorsize = getDoorSize(); doorsize > -1; doorsize--) {
                 Thread.sleep(150);
                 setDoorSize(doorsize);
@@ -153,14 +142,12 @@ public class Elevators {
     }
     
     public int getDoorSize() {
-    	
-		return door_size;
-	}
+	return door_size;
+    }
 
-	public void setDoorSize(int door_size) {
-		this.door_size = door_size;
-	}
-    
+    public void setDoorSize(int door_size) {
+	this.door_size = door_size;
+    }
 }
 
 
