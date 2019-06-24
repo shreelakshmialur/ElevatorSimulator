@@ -18,14 +18,14 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
     public static Object interiorButtonDummmy = new Object();
     public static volatile String commandType = "";
     private PriorityQueue<Integer> callQueue1;
-   public static ArrayList<JButton> active_buttons1 = new ArrayList<JButton>(); 
+    public static ArrayList<JButton> active_buttons1 = new ArrayList<JButton>(); 
     public static ArrayList<JButton> active_buttons = new ArrayList<JButton>(); 
     public static JButton dummy= new JButton();
+	
     public static void listen() {
         Thread listener = new Thread(new ElevatorCalls());
         listener.start();
     }
-
 
     @Override
     public void run() {
@@ -33,45 +33,25 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
             Scanner sc = new Scanner(System.in);
             // TODO Auto-generated method stub
             while (true) {
-             
-                if ("internal".equalsIgnoreCase(commandType)) {
-                   
-                    synchronized (interiorButtonDummmy) {active_buttons.add(Gui.internalButtonClicked);
-                      
-                            
-                    	 if (goToFloorClickedByInteriorButtons != null) {	 
-                        	
-                      
-                            Controller.getElevatorContainer().get(goToFloorClickedByInteriorButtons[0]).addQueue(goToFloorClickedByInteriorButtons[1]);
-                            Controller.getElevatorContainer().get(goToFloorClickedByInteriorButtons[0]).serveFloor2();
-                           
-                   
-                            
-                            commandType = "";
-                            
-                        }
-                    }
-                } else if ("external".equalsIgnoreCase(commandType)) {
+             if ("internal".equalsIgnoreCase(commandType)) {
+                   synchronized (interiorButtonDummmy) {active_buttons.add(Gui.internalButtonClicked);
+							
+                   if (goToFloorClickedByInteriorButtons != null) {	 
+ 			Controller.getElevatorContainer().get(goToFloorClickedByInteriorButtons[0]).addQueue(goToFloorClickedByInteriorButtons[1]);
+                        Controller.getElevatorContainer().get(goToFloorClickedByInteriorButtons[0]).serveFloor2();
+                        commandType = "";
+                   }
+                }
+             } else if ("external".equalsIgnoreCase(commandType)) {
                     synchronized (ElevatorCalls.class) {
                         if(goToFloorEnteredByGui != -1) { 
-                        	
-                        	
-                        	
-                        	
-                            Elevators chosen1 = getNearestElevator(goToFloorEnteredByGui,Elevators.motion_direction);
+      			    Elevators chosen1 = getNearestElevator(goToFloorEnteredByGui,Elevators.motion_direction);
                           
-                          // Elevators chosen1= randomElevator();
-                            
-                            
-                            
-                            chosen1.addQueue(goToFloorEnteredByGui);   active_buttons1.add(Gui.externalButtonClicked);    setExternal(goToFloorEnteredByGui,true);// System.out.println("This is callin from here External calling correctly");
-                        	
-                            chosen1.serveFloor2();
-                           
+                            // Elevators chosen1= randomElevator();
+           	            chosen1.addQueue(goToFloorEnteredByGui);   active_buttons1.add(Gui.externalButtonClicked);    setExternal(goToFloorEnteredByGui,true);// System.out.println("This is callin from here External calling correctly");
+     			    chosen1.serveFloor2();
                             commandType = "";
-                        } else {
-                           
-                        }
+                        } 
                     }
                 }
 
@@ -100,30 +80,25 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
            
             double currentfloor = Controller.elevator_container.get(i).getCurrentFloor();
          
-            
-
-          
             if (currentfloor >= closestFloor-1 && currentfloor < floorNumber+1 ) {
                 closestElevator = currentele;
 
                 closestFloor = currentfloor;
               
-  //          }
-}   
-   if ( currentfloor ==floorNumber) { 
-                closestElevator = currentele;
+	} 
+		
+       if ( currentfloor ==floorNumber) { 
+            closestElevator = currentele;
             closestFloor=currentfloor;
-            }
- 
-   else	   	if (currentfloor != floorNumber &&closestFloor!=floorNumber && Math.abs(currentfloor - floorNumber) <= max) {
+       }
+       else if (currentfloor != floorNumber &&closestFloor!=floorNumber && Math.abs(currentfloor - floorNumber) <= max) {
                 closestElevator = currentele;
                 max = Math.abs(currentfloor - floorNumber);
-            
-            }
+       }
         
  if(currentfloor==floorNumber) {
-closestElevator=currentele;
-}
+	closestElevator=currentele;
+ }
 
         }
         return closestElevator;
