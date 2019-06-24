@@ -15,11 +15,7 @@ import main.Controller;
 import main.ElevatorCalls;
 import model.Elevators;
 
-
-
 public class Gui extends JPanel {
-   
-   
     public static JButton externalButtonClicked;
     
     public static JButton internalButtonClicked;
@@ -34,7 +30,6 @@ public class Gui extends JPanel {
         this.Calls = Calls;
     }
 
-  
     public static void createGraphics(ArrayList<Elevators> e) {
         JFrame mainframe = new JFrame("Elevator Simulator");
         mainframe.setSize(850, 650);
@@ -55,7 +50,6 @@ public class Gui extends JPanel {
         mainframe.setLocation(10, 50);
         mainframe.setVisible(true);
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      
 
         JPanel ibut = new JPanel();
         JFrame iframe = new JFrame("Interior Buttons");
@@ -150,7 +144,6 @@ public class Gui extends JPanel {
                         externalButtonClicked = eup[i];
                     }
                 }
-                
             });
 
             eup[i].setBackground(Color.gray);
@@ -187,16 +180,16 @@ public class Gui extends JPanel {
                 edwn[i].setVisible(false);
                 edwn[i].setEnabled(false);
             }
-
         }
-
     }
+	
     public static double rounding(double value, int places) {
 	    if (places < 0) throw new IllegalArgumentException();
 
 	    BigDecimal bd = new BigDecimal(value);
 	    bd = bd.setScale(places, RoundingMode.HALF_UP);
-	    return bd.doubleValue();  }
+	    return bd.doubleValue();  
+    }
 
     public static void intButtons(JPanel panel) {
 
@@ -235,10 +228,8 @@ public class Gui extends JPanel {
             
                 interior[i][j].setName((i)+""+(j+1));
                 panel.add(interior[i][j]);
-            }
-           
-        }
-       
+            }    
+	}      
     }
 }
 
