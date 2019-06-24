@@ -35,9 +35,7 @@ public class Gui extends JPanel {
     }
 
   
-  public static void createGraphics(ArrayList<Elevators> e) {
-
-
+    public static void createGraphics(ArrayList<Elevators> e) {
         JFrame mainframe = new JFrame("Elevator Simulator");
         mainframe.setSize(850, 650);
 
@@ -70,10 +68,8 @@ public class Gui extends JPanel {
 
         iframe.setLocation(870, 50);
         iframe.setVisible(true);
-       iframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       
-    
-   
+        iframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         while (true){
           
         try {
@@ -81,8 +77,9 @@ public class Gui extends JPanel {
         } catch (Exception ex) {
         }
         gui.repaint();
+        }
+    }
 
-    } }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         int w = getSize().width; 
@@ -106,37 +103,29 @@ public class Gui extends JPanel {
                
             }
         }
-
         
         for (double i = 0; i <= nfloors - 1;i=rounding(i+0.5,1)) {
             for (int j = 0; j < elevator_container.size(); ++j) {
                 int elev_level = (int) (row * (nfloors - i - 1));
-              
-              
+
                 int	door = elevator_container.get(j).getDoorSize();
                 if (elevator_container.get(j).getCurrentFloor() == i) {
-                
-					
-				
-                	
-                	g.setColor(Color.ORANGE);
-                g.fillRect(j * col + 3 * p, elev_level + p, diameter - 2 * p, diameter);
-            
-                	if(door>0) {
-	                	g.setColor(Color.black);
-	                	g.fillRect(j*col+3*p+8*(p-door) +30, elev_level+p, (int)((door/4.0)*(diameter-2*p)), diameter);
-	                
-					} 
-                    ElevatorCalls.goToFloorEnteredByGui=-1;//  } 
-                g.setColor(Color.cyan);
-               
-                g.drawString("" + (int) (i + 1), j * col + (p + 4) * p, elev_level + row / 3 - (p - 4));
+                    g.setColor(Color.ORANGE);
+                    g.fillRect(j * col + 3 * p, elev_level + p, diameter - 2 * p, diameter);
+
+                    if(door>0) {
+                        g.setColor(Color.black);
+                        g.fillRect(j*col+3*p+8*(p-door) +30, elev_level+p, (int)((door/4.0)*(diameter-2*p)), diameter);
+                    }
+
+                    ElevatorCalls.goToFloorEnteredByGui=-1;
+                        g.setColor(Color.cyan);
+
+                    g.drawString("" + (int) (i + 1), j * col + (p + 4) * p, elev_level + row / 3 - (p - 4));
+                }
             }
         }
-            }
     }
-    
-
 
     public static void extButtons(JPanel panel) {
 
@@ -163,11 +152,9 @@ public class Gui extends JPanel {
                 }
                 
             });
-            
-            
+
             eup[i].setBackground(Color.gray);
             eup[i].setName((num_floors - 1 - i) + "u");
-          
 
             panel.add(eup[i]);
             if (i == 0) {
@@ -190,11 +177,9 @@ public class Gui extends JPanel {
                     }
                 }
             });
-           
             
             edwn[i].setBackground(Color.gray);
             edwn[i].setName((num_floors - 1 - i) + "d");
-         
 
             panel.add(edwn[i]);
 
@@ -254,10 +239,8 @@ public class Gui extends JPanel {
            
         }
        
-    	}
-
-   
     }
+}
 
 
    
