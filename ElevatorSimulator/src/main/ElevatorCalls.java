@@ -24,7 +24,6 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
         listener.start();
     }
 
-
     @Override
     public void run() {
         try {
@@ -40,7 +39,6 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
                             Controller.getElevatorContainer().get(goToFloorClickedByInteriorButtons[0]).serveFloor2();
 
                             commandType = "";
-
                         }
                     }
                 } else if ("external".equalsIgnoreCase(commandType)) {
@@ -59,7 +57,6 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
                         }
                     }
                 }
-
             }
         } catch (Exception e) {
             System.out.println("exception is in chosing the elevator" + e);
@@ -102,7 +99,6 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
             if(currentfloor==floorNumber) {
                 closestElevator=currentele;
             }
-
         }
         return closestElevator;
     }
@@ -111,7 +107,6 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
         if (ie.equals("i")) {
             return 1;
         }
-
         return 0;
     }
 
@@ -123,7 +118,7 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
 
                 JButton b =k.next();
 
-                //	System.out.println(b.getName()+"froom inside the external while loop compares with" +floor);
+                //System.out.println(b.getName()+"froom inside the external while loop compares with" +floor);
                 if(b.getName().contains(floor+"u") || b.getName().contains(floor+"d")) {
                 b.setBackground(Color.GRAY);
                 //ElevatorCalls.goToFloorEnteredByGui =k.next();
@@ -137,25 +132,18 @@ public class ElevatorCalls implements Runnable, SchedulingAlgorithm {
     }
     
     public static void setInternal(int i, int j, boolean val) {
-		
-		 if(!val) { 
-			 ListIterator<JButton> litr = active_buttons.listIterator();
-	    	
-			 while (litr.hasNext()) {
-			     JButton b = litr.next();
-
-			     if(b.getName().contains(i+""+(j+1))) {
-			         b.setBackground(Color.gray);
-			         dummy = b;
-
-			     }
-			 }
+	if(!val) { 
+		ListIterator<JButton> litr = active_buttons.listIterator();
+	    	while (litr.hasNext()) {
+			JButton b = litr.next();
+			if(b.getName().contains(i+""+(j+1))) {
+				b.setBackground(Color.gray);
+			        dummy = b;
+			}
 		}
-
-		 dummy.setBackground(Color.gray);
-		 active_buttons.remove(dummy);
-		 val=false;
 	}
-  
-   
+	dummy.setBackground(Color.gray);
+	active_buttons.remove(dummy);
+	val=false;
+    }
 }
